@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cameroon Crop Yield Predictor</title>
+</head>
+<body>
+    <h2>Enter Environmental Data</h2>
+    <form method="post">
+        <label>Average Temperature:</label>
+        <input type="number" step="any" name="avg_temperature" required><br><br>
+        {% for col in ["Crop Residues", "Synthetic Fertilizers", "Waste", "Rice Cultivation", "Manure applied to Soils"] %}
+        <label>{{ col }}:</label>
+        <input type="number" step="any" name="{{ col }}" required><br><br>
+        {% endfor %}
+        <input type="submit" value="Predict Yields">
+    </form>
+    {% if prediction %}
+        <h3>Predicted Yields (kg/ha):</h3>
+        <ul>
+            <li>Bananas: {{ prediction[0]|round(2) }}</li>
+            <li>Cassava: {{ prediction[1]|round(2) }}</li>
+            <li>Coffee: {{ prediction[2]|round(2) }}</li>
+            <li>Tea: {{ prediction[3]|round(2) }}</li>
+        </ul>
+    {% endif %}
+</body>
+</html>
