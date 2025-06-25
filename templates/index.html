@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,15 +6,14 @@
 <body>
     <h2>Enter Environmental Data</h2>
     <form method="post">
-        <label>Average Temperature:</label>
-        <input type="number" step="any" name="avg_temperature" required><br><br>
-        {% for col in ["Crop Residues", "Synthetic Fertilizers", "Waste", "Rice Cultivation", "Manure applied to Soils"] %}
-        <label>{{ col }}:</label>
-        <input type="number" step="any" name="{{ col }}" required><br><br>
+        {% for col in feature_columns %}
+            <label>{{ col }}:</label>
+            <input type="number" step="any" name="{{ col }}" required><br><br>
         {% endfor %}
         <input type="submit" value="Predict Yields">
     </form>
-    {% if prediction %}
+
+    {% if prediction.any() %}
         <h3>Predicted Yields (kg/ha):</h3>
         <ul>
             <li>Bananas: {{ prediction[0]|round(2) }}</li>
